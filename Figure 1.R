@@ -1,7 +1,7 @@
 setwd("~/EpiEstim/Epi Methods/Code Final")
 source("Model_synthetic structure.R")
 
-
+###Whitman County Daily Data
 Whit_Co_daily <- read.csv("Whit_CO_daily.csv", header=TRUE)
 Whit_Co_daily <- subset(Whit_Co_daily, J_date>229)
 A <- ggplot(Whit_Co_daily, aes(x=J_date,y=Cases)) + theme_minimal()+ 
@@ -35,6 +35,7 @@ B <- ggplot(Whit_R_t_df , aes(x=J_date, y=`Mean(R)`)) + theme_minimal()+
   geom_ribbon(aes(ymin=`Quantile.0.025(R)`, ymax=`Quantile.0.975(R)`),alpha=0.1)+
   geom_hline(yintercept=1, linetype="dotted")
 
+#Whitman County Weekly Aggregated Data
 Whit_Co_weekly <- read.csv("Whit_CO_week.csv", header=TRUE)
 Whit_Co_weekly <- subset(Whit_Co_weekly, Week>33)
 C <- ggplot(Whit_Co_weekly, aes(x=Week,y=Cases)) + theme_minimal()+ 
@@ -68,7 +69,7 @@ D <- ggplot(agg_R_Whit_df , aes(x=J_date, y=`Mean(R)`)) + theme_minimal()+
   geom_ribbon(aes(ymin=`Quantile.0.025(R)`, ymax=`Quantile.0.975(R)`),alpha=0.1)+
   geom_hline(yintercept=1, linetype="dotted")
 
-##############Separate Subpopulatiosn
+##############Whitman County Subpopulation Plot
 
 E <- ggplot(Whit_Co_weekly, aes(x=Week,y=PUL_cases)) + theme_minimal()+ 
   geom_bar(stat="identity", color="steelblue",fill="steelblue", alpha=0.5)+
