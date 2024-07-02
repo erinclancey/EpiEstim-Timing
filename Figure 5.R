@@ -1,7 +1,6 @@
-###PLOT synthetic structure
+# Show Plot for a single population
 setwd("~/EpiEstim/Epi Methods/Code Final")
 source("Model_synthetic structure.R")
-set.seed(620)
 ##################Choose parameter values and simulate model
 rho=0.1
 k=2
@@ -84,5 +83,3 @@ one <- ggplot(sim_data, aes(x=day)) + theme_minimal()+
         legend.text=element_text(size=12),
         legend.position="bottom")
 plot(one)
-
-
