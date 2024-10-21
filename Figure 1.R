@@ -31,7 +31,7 @@ B <- ggplot(Whit_R_t_df , aes(x=J_date, y=`Mean(R)`)) + theme_minimal()+
   ylab(TeX("\\textit{\\hat{R}}$_t$"))+
   ggtitle("Estimate from Daily Case Reports")+
   scale_x_continuous(limits=c(237,365), n.breaks=10)+
-  scale_y_continuous(limits=c(0,5), n.breaks=5)+
+  scale_y_continuous(limits=c(0,4), n.breaks=5)+
   geom_ribbon(aes(ymin=`Quantile.0.025(R)`, ymax=`Quantile.0.975(R)`),alpha=0.1)+
   geom_hline(yintercept=1, linetype="dotted")
 
@@ -65,7 +65,7 @@ D <- ggplot(agg_R_Whit_df , aes(x=J_date, y=`Mean(R)`)) + theme_minimal()+
   ylab(TeX("\\textit{\\hat{R}}$_t$"))+
   ggtitle("Estimate from Weekly Case Reports")+
   scale_x_continuous(limits=c(237,365), n.breaks=10)+
-  scale_y_continuous(limits=c(0,5), n.breaks=5)+
+  scale_y_continuous(limits=c(0,4), n.breaks=5)+
   geom_ribbon(aes(ymin=`Quantile.0.025(R)`, ymax=`Quantile.0.975(R)`),alpha=0.1)+
   geom_hline(yintercept=1, linetype="dotted")
 
@@ -106,8 +106,10 @@ PUL_R_t <- estimate_R(incid = Whit_Co_weekly$PUL_cases,
                       config = make_config(list(
                         mean_si = GI, 
                         std_si = sd_GI)))
-PUL_R_t_df <- PUL_R_t$R[-c(1:45),]
-PUL_R_t_df$J_date <- Whit_Co_daily$J_date[-c(1:58)]
+#PUL_R_t_df <- PUL_R_t$R[-c(1:45),]
+#PUL_R_t_df$J_date <- Whit_Co_daily$J_date[-c(1:58)]
+PUL_R_t_df <- PUL_R_t$R
+PUL_R_t_df$J_date <- Whit_Co_daily$J_date[-c(1:13)]
 filter(PUL_R_t_df, `Mean(R)` <1)[1,]
 
 G <- ggplot()+
@@ -117,7 +119,7 @@ G <- ggplot()+
   ylab(TeX("\\textit{\\hat{R}}$_t$"))+
   ggtitle("Whitman Co. Subpopuation Estimates")+
   scale_x_continuous(limits=c(237,365), n.breaks=10)+
-  scale_y_continuous(limits=c(0,5), n.breaks=5)+
+  scale_y_continuous(limits=c(0,8), n.breaks=5)+
   geom_ribbon(data = WSU_R_t_df,aes(x=J_date, ymin=`Quantile.0.025(R)`, ymax=`Quantile.0.975(R)`),alpha=0.1)+
   geom_ribbon(data = PUL_R_t_df,aes(x=J_date, ymin=`Quantile.0.025(R)`, ymax=`Quantile.0.975(R)`),alpha=0.1)+
   geom_hline(yintercept=1, linetype="dotted")
